@@ -3,7 +3,7 @@
 from typing import Dict, Tuple
 
 from pyhgf.typing import AdjacencyLists, Edges
-from pyhgf.utils import add_edges
+from pyhgf.utils.add_edges import add_edges
 
 
 def add_parent(
@@ -21,7 +21,7 @@ def add_parent(
         The index of the node you want to connect a new parent node to.
     coupling_type :
         The type of coupling you want between the existing node and it's new parent.
-        Can be either "value" or "volatility".
+        Can be either `"value"` or `"volatility"`.
     mean :
         The mean value of the new parent node.
 
