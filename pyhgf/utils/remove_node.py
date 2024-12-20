@@ -145,14 +145,17 @@ def _remove_edges(
 
 
 def remove_node(attributes: Dict, edges: Edges, index: int) -> Tuple[Dict, Edges]:
-    """Remove a node from the HGF network and adjust remaining indices.
+    """Remove a given node from the network.
+
+    This function removes a node from the network by deleting its parameters in the
+    attributes and edges variables, and adjusts the indices of the remaining nodes.
 
     Parameters
     ----------
     attributes :
-        The attributes of the existing network.
+        The attributes of the network.
     edges :
-        The edges of the existing network.
+        The edges of the network.
     index :
         The index of the node to remove.
 
@@ -162,13 +165,14 @@ def remove_node(attributes: Dict, edges: Edges, index: int) -> Tuple[Dict, Edges
         Updated attributes and edges with the node removed and indices adjusted.
 
     """
+    # ensure that the node exists in the network
     if index not in attributes or index >= len(edges):
         raise ValueError(f"Node with index {index} does not exist in the network")
 
     edges_as_list = list(edges)
     node = edges_as_list[index]
 
-    # First remove all connections to/from this node
+    # First remove all connections to/from this node using the _remove_edges function
     if node.value_parents:
         attributes, edges = _remove_edges(
             attributes,
@@ -215,7 +219,7 @@ def remove_node(attributes: Dict, edges: Edges, index: int) -> Tuple[Dict, Edges
 
     # Create new edges list with adjusted indices
     new_edges = []
-    for i, node in enumerate(edges_as_list):
+    for node in edges_as_list:
         new_value_parents = None
         new_volatility_parents = None
         new_value_children = None
