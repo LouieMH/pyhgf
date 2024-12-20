@@ -239,6 +239,7 @@ Utilities for manipulating neural networks.
    add_edges
    get_input_idxs
    add_parent
+   remove_node
 
 Math
 ****
